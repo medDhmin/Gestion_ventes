@@ -1,5 +1,5 @@
 from django import forms
-from accounts.models import Materiel,Employee,Etablissement,Emplacement
+from accounts.models import Materiel,Employee,Etablissement,Emplacement,Affectation
 
 # Materiel
 class materielForm(forms.ModelForm):
@@ -22,4 +22,9 @@ class etablissementForm(forms.ModelForm):
 class emplacementForm(forms.ModelForm):
     class Meta:
         model= Emplacement
+        fields = "__all__"
+
+class affectationForm(forms.ModelForm):
+    class Meta:
+        model= Affectation
         fields = "__all__"

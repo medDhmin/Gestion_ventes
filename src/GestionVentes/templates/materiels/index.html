@@ -34,6 +34,7 @@
                     <th>Type</th>
                     <th>Désignation</th>
                     <th>Marque</th>
+                    <th>Emplacement</th>
                     <th>Caractéristique</th>
                     <th>État</th>
                     <th colspan="2" >Actions</th>
@@ -46,6 +47,11 @@
                     <td>{{i.type}}</td>
                     <td>{{i.designation}}</td>
                     <td>{{i.marque}}</td>
+                    <td>
+                        {% for emplacement in i.emplacements %}
+                            {{ emplacement }}<br>
+                        {% endfor %}
+                    </td>
                     <td>{{i.caracteristique}}</td>
                     <td>{{i.etat}}</td>
                     <td>
@@ -54,6 +60,7 @@
                     <td>
                       <a class='button' href="/delete_materiel/{{i.id}}">Supprimer</a>
                     </td>
+
                   </tr>
                   {% endfor %}
                 </tbody>

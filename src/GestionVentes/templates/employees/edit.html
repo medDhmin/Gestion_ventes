@@ -33,10 +33,24 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-12">
-                                                    <div class="position-relative form-group"><label  class="">Grade</label><input name="grade"  type="text" class="form-control" value="{{employe.grade}}"></div>
+                                                    <div class="position-relative form-group"><label  class="">Grade</label>
+                                                        <select class="form-control" name="grade">
+                                                            <option value="{{employe.grade}}">{{employe.grade}}</option>
+                                                            <option>Directeur</option>
+                                                            <option>Chef service</option>
+                                                            <option>Chef du vision</option>
+                                                            <option>Inginieur</option>
+                                                            <option>Technicien</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        <div style="display: flex ; justify-content: space-between ; ">
                                             <button class="mt-2 btn btn-primary">Enregistrer</button>
+                                             <a href="{% url 'employe' %}"class="mt-2 btn btn-primary">
+                                                Retour
+                                            </a>
+                                        </div>
                                         </form>
                                     </div>
                                 </div>

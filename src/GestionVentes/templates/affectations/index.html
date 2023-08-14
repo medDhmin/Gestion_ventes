@@ -1,7 +1,7 @@
 {% extends 'navbar.html' %}
 
 {% block title %}
-  Matériels
+  Affectation
 {% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
             <div class="card-body">
               <div style="display: flex ; justify-content: space-between;">
                 <div>
-                  <h5 class="card-title">Emplacements </h5>
+                  <h5 class="card-title">Liste des affectations </h5>
                 </div>
                 <div style="display: flex ; justify-content: space-between;">
                   <div style="display: flex ; justify-content: space-between;" >
@@ -22,7 +22,7 @@
                     <a class="search-btn" href="#"></a>
                   </div>
                   <div>
-                    <a href="{% url 'add_emplacement' %}" class="mb-2 mr-2 btn btn-info"><i class="fa fa-fw" aria-hidden="true" title="Copier pour utiliser plus-square"></i> Ajouter </a>
+                    <a href="{% url 'add_affectation' %}" class="mb-2 mr-2 btn btn-info"><i class="fa fa-fw" aria-hidden="true" title="Copier pour utiliser plus-square"></i> Ajouter </a>
                   </div>
                 </div>
               </div>
@@ -30,24 +30,23 @@
               <table class="mb-0 table" id="myTable">
                 <thead>
                   <tr>
-                    <th>Desgination</th>
-                    <th>id_etablisement</th>
-                    <th>id_employee</th>
+                    <th>Materiel</th>
+                    <th>Emplacement</th>
+                    <th>Date</th>
                     <th colspan="2" >Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {% for i in emplacements %}
+                  {% for i in affectations %}
                   <tr>
-                    <td>{{i.designation}}</td>
-                    <td>{{i.id_etablissement}}</td>
-                    <td>{{i.id_employee}}</td>
-
+                    <td>{{i.id_materiel}}</td>
+                    <td>{{i.id_emplacement}}</td>
+                    <td>{{i.date}}</td>
                     <td>
-                      <a class='button' href="/edit_emplacement/{{i.id}}">Modifier</a>
+                      <a class='button' href="/edit_affectation/{{i.id}}">Modifier</a>
                     </td>
                     <td>
-                      <a class='button' href="/delete_emplacement/{{i.id}}">Supprimer</a>
+                      <a class='button' href="/delete_affectation/{{i.id}}">Supprimer</a>
                     </td>
                   </tr>
                   {% endfor %}

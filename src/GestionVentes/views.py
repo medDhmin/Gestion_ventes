@@ -1,15 +1,24 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-from accounts.models import Materiel,Employee,Etablissement,Emplacement
-from .forms import materielForm,employeForm,etablissementForm,emplacementForm
+from accounts.models import Materiel,Employee,Etablissement,Emplacement,Affectation
+from .forms import materielForm,employeForm,etablissementForm,emplacementForm,affectationForm
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='login')
 def homePage(request):
     return render(request,"home.html",{"navbar":'home'})
+@login_required(login_url='login')
 
 
 # Materiels
 def materiel(request):
-    all_materiel = Materiel.objects.all()
-    return render(request,"materiels/index.html",{"materiels": all_materiel,"navbar":'materiel'})
+    materiels = Materiel.objects.all()
+    for materiel in materiels:
+        affectations = Affectation.objects.filter(id_materiel=materiel)
+        emplacements = [affectation.id_emplacement.designation for affectation in affectations]
+        materiel.emplacements = emplacements
+    return render(request,"materiels/index.html",{"materiels": materiels,"navbar":'materiel'})
+@login_required(login_url='login')
 
 
 def load_form_materiel(request):
@@ -31,6 +40,37 @@ def delete_materiel(request, id):
     materiel = Materiel.objects.get(id=id)
     materiel.delete()
     return redirect('materiel')
+
+
+# Affectation
+def affectation(request):
+    all_affectation = Affectation.objects.all()
+    return render(request,"affectations/index.html",{"affectations": all_affectation,"navbar":'affectation'})
+
+def load_form_affectation(request):
+    all_materiel = Materiel.objects.all()
+    all_emplacement = Emplacement.objects.all()
+    form = affectationForm()
+    return render(request, "affectations/add.html",{'form':form,"navbar":'affectation','materiels':all_materiel,'emplacements':all_emplacement})
+def add_affectation(request):
+    form = affectationForm(request.POST)
+    form.save()
+    return redirect('affectation')
+def edit_affectation(request, id):
+    all_materiel = Materiel.objects.all()
+    all_emplacement = Emplacement.objects.all()
+    affectation = Affectation.objects.get(id=id)
+    form = affectationForm()
+    return render(request,'affectations/edit.html',{'form':form,'affectation':affectation,"navbar":'affectation','materiels':all_materiel,'emplacements':all_emplacement})
+def update_affectation(request, id):
+    affectation = Affectation.objects.get(id=id)
+    form = affectationForm(request.POST, instance=affectation)
+    form.save()
+    return redirect('affectation')
+def delete_affectation(request, id):
+    affectation = Affectation.objects.get(id=id)
+    affectation.delete()
+    return redirect('affectation')
 
 
 
@@ -87,7 +127,7 @@ def delete_etablissement(request, id):
     etablissement.delete()
     return redirect('etablissement')
 
-# Etablissement
+# Emplacement
 def emplacement(request):
     all_emplacement= Emplacement.objects.all()
     return render(request,"emplacements/index.html",{"emplacements": all_emplacement,"navbar":'emplacement'})
@@ -102,14 +142,17 @@ def add_emplacement(request):
     form.save()
     return redirect('emplacement')
 def edit_emplacement(request, id):
-    etablissement = Etablissement.objects.get(id=id)
-    return render(request,'etablissements/edit.html',{'etablissement':etablissement,"navbar":'etablissement'})
-def update_etablissement(request, id):
-    etablissement = Etablissement.objects.get(id=id)
-    form = etablissementForm(request.POST, instance=etablissement)
+    all_employe = Employee.objects.all()
+    all_etablissement = Etablissement.objects.all()
+    emplacement = Emplacement.objects.get(id=id)
+    form = emplacementForm()
+    return render(request,'emplacements/edit.html',{'form':form,'emplacement':emplacement,"navbar":'emplacement','employes':all_employe,'etablissements':all_etablissement})
+def update_emplacement(request, id):
+    emplacement = Emplacement.objects.get(id=id)
+    form = emplacementForm(request.POST, instance=emplacement)
     form.save()
-    return redirect('etablissement')
-def delete_etablissement(request, id):
-    etablissement = Etablissement.objects.get(id=id)
-    etablissement.delete()
-    return redirect('etablissement')
+    return redirect('emplacement')
+def delete_emplacement(request, id):
+    emplacement = Emplacement.objects.get(id=id)
+    emplacement.delete()
+    return redirect('emplacement')

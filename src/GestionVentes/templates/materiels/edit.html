@@ -28,7 +28,15 @@
                                                     <div class="position-relative form-group"><label  class="">Marque</label><input name="marque"  type="text" class="form-control" value="{{materiel.marque}}"></div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <div class="position-relative form-group"><label  class="">Etat</label><input name="etat"  type="text" class="form-control" value="{{materiel.etat}}"></div>
+                                                    <div class="position-relative form-group"><label  class="">Etat</label>
+                                                    <select class="form-control" name="etat" required>
+                                                        <option value="{{materiel.etat}}">{{materiel.etat}}</option>
+                                                            <option>HS</option>
+                                                            <option>Bon etat</option>
+                                                            <option>Neuve</option>
+                                                    </select>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -36,7 +44,13 @@
                                                     <div class="position-relative form-group"><label  class="">Caracteristiques</label><input name="caracteristique" id="exampleText" class="form-control"  value="{{materiel.caracteristique}} ">
                                                 </div>
                                             </div>
+                                            </div>
+                                            <div style="display: flex ; justify-content: space-between ; ">
                                             <button class="mt-2 btn btn-primary">Enregistrer</button>
+                                            <a href="{% url 'materiel' %}"class="mt-2 btn btn-primary">
+                                                Retour
+                                            </a>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>

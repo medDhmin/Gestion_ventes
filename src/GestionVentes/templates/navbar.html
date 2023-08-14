@@ -17,7 +17,9 @@
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
-                <div class="logo-src"></div>
+                <div  style="height:50px;width:200px;">
+                    <img src="{% static 'assets/images/mes.png' %}" alt="" style="max-width:100%;max-height:100%">
+                </div>
                 <div class="header__pane ml-auto">
                     <div>
                         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -114,33 +116,39 @@
                             <ul class="vertical-nav-menu">
                                 <li class="app-sidebar__heading">Tableaux de bord</li>
                                 <li>
-                                    <a href="{% url 'home' %}" class="mm-active">
+                                    <a href="{% url 'home' %}" {% if navbar == "home" %} class="mm-active" {% endif %}>
                                         <i class="metismenu-icon pe-7s-display2"> </i>
                                         Tableau de bord
                                     </a>
                                 </li>
-                                <li class="app-sidebar__heading">Gestion</li>
+                                <li class="app-sidebar__heading float-start">Gestion</li>
                                 <li>
-                                    <a href="{% url 'materiel' %}"  >
+                                    <a  href="{% url 'materiel' %}" {% if navbar == "materiel" %} class="mm-active" {% endif %} ><i class="fas fa-tv"></i>
                                         Gestion des matériels
                                     </a>
                                 </li>
                                 <br>
                                 <li>
-                                    <a href="{% url 'emplacement' %}"  >
+                                    <a href="{% url 'emplacement' %}" {% if navbar == "emplacement" %} class="mm-active" {% endif %} ><i class="fa fa-fw" aria-hidden="true" title="Copy to use map-marker"></i>
                                         Gestion des emplacements
                                     </a>
                                 </li>
                                 <br>
                                 <li>
-                                    <a href="{% url 'employe' %}" >
+                                    <a href="{% url 'employe'  %}" {% if navbar == "employe" %} class="mm-active" {% endif %}><i class="fas fa-users"></i>
                                         Gestion des employés
                                     </a>
                                 </li>
                                 <br>
                                 <li>
-                                    <a href="{% url 'etablissement' %}" >
+                                    <a href="{% url 'etablissement'  %}" {% if navbar == "etablissement" %} class="mm-active" {% endif %} ><i class="fa fa-fw" aria-hidden="true" title="Copy to use building"></i>
                                         Gestion des établissements
+                                    </a>
+                                </li>
+                                <br>
+                                <li>
+                                    <a href="{% url 'affectation'  %}" {% if navbar == "affectation" %} class="mm-active" {% endif %} ><i class="fas pe-7s-link"> </i>
+                                        Gestion des affectations
                                     </a>
                                 </li>
                             </ul>

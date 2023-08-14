@@ -57,8 +57,16 @@ urlpatterns = [
     path('emplacement/', views.emplacement, name="emplacement"),
     path('add_emplacement/', views.load_form_emplacement, name="add_emplacement"),
     path('get_add_emplacement/', views.add_emplacement),
-    path('edit_etablissement/<int:id>', views.edit_etablissement, name="edit_etablissement"),
-    path('update_etablissement/<int:id>', views.update_etablissement, name="update_etablissement"),
-    path('delete_etablissement/<int:id>', views.delete_etablissement, name="delete_etablissement"),
+    path('edit_emplacement/<int:id>', views.edit_emplacement, name="edit_emplacement"),
+    path('update_emplacement/<int:id>', views.update_emplacement, name="update_emplacement"),
+    path('delete_emplacement/<int:id>', views.delete_emplacement, name="delete_emplacement"),
+
+    # Affectation
+    path('affectation/', views.affectation, name="affectation"),
+    path('add_affectation/', views.load_form_affectation, name="add_affectation"),
+    path('get_add_affectation/', views.add_affectation),
+    path('edit_affectation/<int:id>', views.edit_affectation, name="edit_affectation"),
+    path('update_affectation/<int:id>', views.update_affectation, name="update_affectation"),
+    path('delete_affectation/<int:id>', views.delete_affectation, name="delete_affectation"),
 
 ]
